@@ -1,7 +1,7 @@
 var win = Ti.UI.currentWindow;
 var loja = win.loja;
 
-win.backgroundImage = '../views/fundo.png';
+win.navBarHidden = false;
 
 var nome = Ti.UI.createLabel({
 	color : '#EDDA74',
@@ -11,7 +11,7 @@ var nome = Ti.UI.createLabel({
 		fontFamily : 'timesnewroman'
 	},
 	textAlign : 'center',
-	top : '10%',
+	top : 30,
 	width : 'auto'
 })
 
@@ -37,20 +37,51 @@ var telefone = Ti.UI.createLabel({
 	textAlign : 'center',
 	top : '10%',
 	width : 'auto'
-})
+});
 
-var mapa = Titanium.UI.createButton({
-	color : 'black',
-	title : 'VER NO MAPA',
-	color : '#3F3F3F',
+var btFone = Titanium.UI.createButton({
+	title : 'Clique aqui para entrar em contato',
+	backgroundImage : 'button/but_RadioOff.png',
 	font : {
-		fontSize : '20%',
+		fontSize : 22,
 		fontFamily : 'timesnewroman'
 	},
-	backgroundImage : 'buttons/buttonMap.png',
+	color : '#EDDA74',
+	height : 65,
+	top : '12%',
+	//zIndex : 8,
+	width : '65%'
+});
+
+btFone.addEventListener('click', function(e) {
+	var confirmCall = Titanium.UI.createAlertDialog({
+		message : '\nVocê gostaria de fazer esta ligação?\n',
+		buttonNames : ['Sim', 'Não']
+	});
+	confirmCall.show();
+	confirmCall.addEventListener('click', function(event) {
+		if (event.index == 0) {
+			call();
+		}
+	});
+	// console.log(loja.fone);
+});
+
+function call() {
+	Titanium.Platform.openURL('tel:' + loja.fone);
+}
+
+var mapa = Titanium.UI.createButton({
+	color : '#EDDA74',
+	title : 'Ver no Mapa',
+	font : {
+		fontSize : '22%',
+		fontFamily : 'timesnewroman'
+	},
+	backgroundImage : 'button/but_Map.png',
 	top : '15%',
-	height : '14%',
-	width : '34%'
+	height : '10%',
+	width : '45%'
 });
 
 mapa.addEventListener('click', function() {
@@ -69,4 +100,7 @@ mapa.addEventListener('click', function() {
 win.add(nome);
 win.add(endereco);
 win.add(telefone);
-win.add(mapa); 
+win.add(btFone);
+win.add(mapa);
+
+//--------------------------------------------------------------------------------

@@ -3,7 +3,7 @@ var fileData = 'dados.txt';
 var file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, fileData);
 var data;
 
-win.backgroundImage = 'fundo.png';
+win.backgroundImage = 'background.png';
 win.title = 'Lojas';
 
 var estados_data = [];
@@ -80,7 +80,7 @@ for (var i in data.estados) {
 
 var btMapa = Titanium.UI.createButton({
 	title : 'Localizar loja mais próxima',
-	backgroundImage : 'buttons/but_RadioOff.png',
+	backgroundImage : 'button/but_RadioOff.png',
 	color : '#EDDA74',
 	font : {
 		fontSize : '20%',
@@ -109,7 +109,7 @@ btMapa.addEventListener('click', function() {
 });
 
 var table = Ti.UI.createTableView({
-	backgroundImage : 'fundo.png',
+	backgroundImage : 'background.png',
 	backgroundRepeat : false,
 	top : 0,
 	left : 0,
@@ -125,7 +125,7 @@ var table = Ti.UI.createTableView({
 table.addEventListener("click", function(e) {
 	if (e.source.hasChild) {
 		var win = Titanium.UI.createWindow({
-			backgroundImage : 'fundo.png',
+			backgroundImage : 'background.png',
 			navBarHidden : false,
 			barColor : '#111',
 			url : "LojasTable.js",

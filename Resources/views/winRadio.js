@@ -1,5 +1,52 @@
-
 var win = Titanium.UI.currentWindow;
+win.backgroundImage = 'background.png';
+
+var logoView = Titanium.UI.createView({
+	width : '95%',
+	height : 75,
+	top : 25
+
+});
+
+var imageLogo = Titanium.UI.createImageView({
+	image : 'logo.png'
+});
+
+logoView.add(imageLogo);
+
+win.add(logoView);
+
+//--------------------------------------------LAYER VIEW------------------------------------------------
+//------------------------ É ADICIONADO ACTIVEINDICATOR, PLAY/PAUSE E VOLUME ---------------------------
+var layerView = Titanium.UI.createView({
+	backgroundImage : 'layer.png',
+	bottom : 15,
+	width : '90%',
+	height : '15%',
+});
+
+var lessLabel = Titanium.UI.createLabel({
+	text : '-',
+	color : '#FFFF',
+	font : {
+		fontSize : 45,
+		font : 'Optima-ExtraBlack'
+	},
+	left : 100
+});
+
+var moreLabel = Titanium.UI.createLabel({
+	text : '+',
+	color : '#FFFF',
+	font : {
+		fontSize : 25,
+		font : 'Optima-ExtraBlack'
+	},
+	right : 15
+});
+
+layerView.add(lessLabel);
+layerView.add(moreLabel);
 //---------------------------------------ACTIVITY INDICATOR---------------------------------------------
 var actInd = Titanium.UI.createActivityIndicator({
 	zIndex : 9,
@@ -14,8 +61,6 @@ function indAudio() {
 	} else {
 		actInd.hide();
 	}
-
-	//console.log(audioPlayer.STATE_WAITING_FOR_DATA);
 }
 
 var loopIndicator;
@@ -24,42 +69,44 @@ win.add(actInd);
 
 //---------------------------------------------PLAUSE---------------------------------------------------
 var pauseResumeButton = Titanium.UI.createButton({
-	backgroundImage : 'buttons/but_Play.png',
+	backgroundImage : 'button/but_Play.png',
 	enabled : false,
-	height : '10%',
-	left : '9%',
-	top : '85%',
-	width : '15%'
+	height : '65%',
+	width : '15%',
+	left : 15
 });
 
-win.add(pauseResumeButton);
+layerView.add(pauseResumeButton);
 
 pauseResumeButton.addEventListener('click', function() {
 	if (audioPlayer.paused) {
-		pauseResumeButton.backgroundImage = 'buttons/but_Pause.png';
+		pauseResumeButton.backgroundImage = 'button/but_Pause.png';
 		audioPlayer.start();
 	} else {
-		pauseResumeButton.backgroundImage = 'buttons/but_Play.png';
+		pauseResumeButton.backgroundImage = 'button/but_Play.png';
 		audioPlayer.pause();
 	}
 });
 
 //---------------------------------------------VOLUME---------------------------------------------------
 var volumeSlider = Ti.UI.createSlider({
-	left : '35%',
-	right : '17%',
-	top : '88.4%',
+	left : 135,
+	right : 40,
 	value : 100,
 	min : 0,
 	max : 100,
 	zIndex : 9
 });
 
-win.add(volumeSlider);
+layerView.add(volumeSlider);
 
 volumeSlider.addEventListener('change', function(e) {
 	audioPlayer.volume = e.value / 100
 });
+
+win.add(layerView);
+//------------------------------------------FIM DO LAYER-------------------------------------------------
+//-------------------------------------------------------------------------------------------------------
 
 //--------------------------------------------PLAYER----------------------------------------------------
 var button = ['LOUNGE', 'ROCK', 'MPB', 'POP'];
@@ -76,8 +123,9 @@ var audioPlayer = Ti.Media.createAudioPlayer({
 for (var i = 0, s = button.length; i < s; i++) {
 	var objectButton = Ti.UI.createButton({
 		title : button[i],
-		backgroundImage : 'buttons/but_RadioOff.png',
-		selectedColor : '#EDDA74',
+		backgroundImage : 'button/but_RadioOff.png',
+		backgroundFocusedImage : 'button/but_RadioOn.png',
+		// selectedColor : '#EDDA74',
 		height : '14%',
 		center : '50%',
 		top : cont + '%',
@@ -98,27 +146,27 @@ for (var i = 0, s = button.length; i < s; i++) {
 			alert('Está aplicação necessita de uma conexão Internet para funcionar: Favor verefique sua conexão.');
 		} else {
 			for (var i = 0, s = startStopButton.length; i < s; i++) {
-				startStopButton[i].backgroundImage = 'buttons/but_RadioOff.png';
+				startStopButton[i].backgroundImage = 'button/but_RadioOff.png';
 			}
 			if (audioPlayer.playing || audioPlayer.paused) {
 				if (audioPlayer.url == e.source.urlStream) {
 					clearInterval(loopIndicator);
 					audioPlayer.release();
-					e.source.backgroundImage = 'buttons/but_RadioOff.png';
-					pauseResumeButton.backgroundImage = 'buttons/but_Play.png';
+					e.source.backgroundImage = 'button/but_RadioOff.png';
+					pauseResumeButton.backgroundImage = 'button/but_Play.png';
 					pauseResumeButton.enabled = false;
 				} else {
 					audioPlayer.release();
 					audioPlayer.url = e.source.urlStream;
-					e.source.backgroundImage = 'buttons/but_RadioOn.png';
-					pauseResumeButton.backgroundImage = 'buttons/but_Pause.png';
+					e.source.backgroundImage = 'button/but_RadioOn.png';
+					pauseResumeButton.backgroundImage = 'button/but_Pause.png';
 					pauseResumeButton.enabled = true;
 					audioPlayer.start();
 				}
 			} else {
 				audioPlayer.url = e.source.urlStream;
-				e.source.backgroundImage = 'buttons/but_RadioOn.png';
-				pauseResumeButton.backgroundImage = 'buttons/but_Pause.png';
+				e.source.backgroundImage = 'button/but_RadioOn.png';
+				pauseResumeButton.backgroundImage = 'button/but_Pause.png';
 				pauseResumeButton.enabled = true;
 				audioPlayer.start();
 				loopIndicator = setInterval(indAudio, 100);

@@ -1,4 +1,4 @@
-Titanium.UI.setBackgroundColor('#fff');
+Titanium.UI.setBackgroundColor('#0000');
 
 //Criamos a Tab Bar (nome no iPhone), ou Tab Group (nome no Titanium)
 var tabGroup = Titanium.UI.createTabGroup();
@@ -7,11 +7,11 @@ var tabGroup = Titanium.UI.createTabGroup();
 var winRadio = Titanium.UI.createWindow({
 	navBarHidden : true,
 	orientationModes : [Ti.UI.PORTRAIT],
-	backgroundImage : 'views/backgroundLogo.png',
+	backgroundImage : 'views/background.png',
 	url : 'views/winRadio.js'
 });
 var tabRadio = Titanium.UI.createTab({
-	icon : 'views/icons/iconradio.png',
+	icon : 'iconradio.png',
 	title : 'Rádio',
 	window : winRadio
 });
@@ -23,7 +23,7 @@ var winJoias = Titanium.UI.createWindow({
 	url : 'views/winJoias.js'
 });
 var tabJoias = Titanium.UI.createTab({
-	icon : 'views/icons/diamond.png',
+	icon : 'diamond.png',
 	title : 'Joias',
 	window : winJoias
 });
@@ -36,7 +36,7 @@ var winHspot = Titanium.UI.createWindow({
 	url : 'views/winHspot.js'
 });
 var tabHspot = Titanium.UI.createTab({
-	icon : 'views/icons/fireNew.png',
+	icon : 'fireNew.png',
 	title : 'Hot Spot',
 	window : winHspot
 });
@@ -48,7 +48,7 @@ var winMapas = Titanium.UI.createWindow({
 	url : 'views/winMapa.js'
 });
 var tabMapas = Titanium.UI.createTab({
-	icon : 'views/icons/map.png',
+	icon : 'map.png',
 	title : 'Nossas Lojas',
 	window : winMapas
 });
