@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <id>com.megamidia.BergersonMobileAndroid</id>
-    <name>Bergerson Mobile Android</name>
-    <version>1.0</version>
-    <publisher>danielvilha</publisher>
+    <id>com.megamidia.Bergerson</id>
+    <name>Bergerson Mobile</name>
+    <version>1.2.4</version>
+    <publisher>MegaMidia Group</publisher>
     <url>http://www.megamidia.com.br</url>
     <description>not specified</description>
-    <copyright>2013 by danielvilha</copyright>
+    <copyright>2013 by MegaMidia Group</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
-    <prerendered-icon>false</prerendered-icon>
+    <prerendered-icon>true</prerendered-icon>
     <statusbar-style>default</statusbar-style>
     <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>
@@ -28,7 +28,37 @@
             <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
         </orientations>
     </iphone>
-    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <android android:id="@android:id/tabhost"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+        <tool-api-level>10</tool-api-level>
+        <manifest android:installLocation="preferExternal"
+            android:versionCode="6" android:versionName="1.2.3">
+            <uses-sdk android:minSdkVersion="9"/>
+            <application>
+                <activity
+                    android:name="ti.modules.titanium.facebook.FBActivity"
+                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="portrait"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiModalActivity"
+                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="ti.modules.titanium.ui.TiTabActivity" android:screenOrientation="portrait"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="ti.modules.titanium.media.TiVideoActivity"
+                    android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+                <activity
+                    android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:screenOrientation="portrait"/>
+            </application>
+        </manifest>
+        <activity android:screenOrientation="portrait"/>
+    </android>
     <mobileweb>
         <precache/>
         <splash>
@@ -39,11 +69,12 @@
     </mobileweb>
     <modules/>
     <deployment-targets>
+        <target device="tizen">false</target>
         <target device="blackberry">false</target>
         <target device="android">true</target>
         <target device="ipad">false</target>
         <target device="iphone">false</target>
         <target device="mobileweb">false</target>
     </deployment-targets>
-    <sdk-version>3.0.2.GA</sdk-version>
+    <sdk-version>3.1.0.GA</sdk-version>
 </ti:app>
